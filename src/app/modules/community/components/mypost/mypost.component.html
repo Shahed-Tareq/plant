@@ -1,0 +1,9 @@
+<div class="post rounded-md p-2 my-1 cursor-pointer  " *ngFor="let post of posts" (click)="viewPost(post)">
+    <div class="post-section hover:bg-[#615c5c17]">
+        <div class="mt-1" >
+            <p class="text-black font-bold mb-1">{{post?.title}}</p>
+           <p class="text-[#000000b3] text-sm">{{post?.details}}</p>
+        </div>
+       
+    </div>
+ </div>

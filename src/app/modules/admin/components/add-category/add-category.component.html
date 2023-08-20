@@ -1,0 +1,29 @@
+<div class="category-form">
+    <h2>Add a New Category</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="addCategoryForm">
+        <div class="flex justify-center items-center mb-2">
+            <label for="file-input" class="cursor-pointer">
+              <div
+                class="bg-zinc-200 w-[120px] h-[120px]  rounded-full flex justify-center items-center"
+              >
+            <i class="fa-solid fa-camera" style="color: #afb1b6; font-size: 25px;" *ngIf="!hasImage"></i> 
+              <img [src]="CategoryImage" class="w-full h-full  rounded-full object-cover" *ngIf="hasImage">
+              </div>
+              <input
+              accept="image/png, image/jpg, image/jpeg"
+              type="file"
+              id="file-input"
+              class="hidden mr-3"
+              (change)="selectPhoto($event)"
+              />
+            </label>
+          </div> 
+      <label for="categoryName">Name:</label>
+      <input type="text" id="categoryName" formControlName="category_name" name="categoryName" required>
+  
+      <label for="categoryDescription">Description:</label>
+      <textarea id="categoryDescription" formControlName="short_description" name="categoryDescription" required></textarea>
+  
+      <button type="submit">Add Category</button>
+    </form>
+  </div>

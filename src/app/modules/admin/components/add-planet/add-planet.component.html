@@ -1,0 +1,46 @@
+<div class="category-form">
+    <h2>Add a New Category</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="addPlanetForm" class="w-full">
+        <div class="flex justify-center items-center mb-2">
+            <label for="file-input" class="cursor-pointer">
+              <div
+                class="bg-zinc-200 w-[120px] h-[120px]  rounded-full flex justify-center items-center"
+              >
+            <i class="fa-solid fa-camera" style="color: #afb1b6; font-size: 25px;" *ngIf="!hasImage"></i> 
+              <img [src]="CategoryImage" class="w-full h-full  rounded-full object-cover" *ngIf="hasImage">
+              </div>
+              <input
+              accept="image/png, image/jpg, image/jpeg"
+              type="file"
+              id="file-input"
+              class="hidden mr-3"
+              (change)="selectPhoto($event)"
+              />
+            </label>
+          </div> 
+      <label for="categoryName">Name:</label>
+      <input type="text" id="categoryName" formControlName="category_name" name="categoryName" required>
+  
+      <label for="categoryDescription">Description:</label>
+      <textarea id="categoryDescription" formControlName="image" name="categoryDescription" required></textarea>
+      <label for="careDetails">care Details:</label>
+      <textarea id="careDetails" formControlName="careDetails" name="categoryDescription" required></textarea>
+      <label for="medicalBenefit">Medical Benefit:</label>
+      <textarea id="medicalBenefit" formControlName="medicalBenefit" name="categoryDescription" required></textarea>
+      <div class="season-dropdown">
+        <label for="seasonSelect">Select a Season:</label>
+        <select id="seasonSelect">
+          <option value="" disabled selected>Select a season</option>
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="autumn">Autumn</option>
+          <option value="winter">Winter</option>
+        </select>
+      </div>
+      
+  
+     <div>
+        <button type="submit">Add Category</button>
+     </div>
+    </form>
+  </div>

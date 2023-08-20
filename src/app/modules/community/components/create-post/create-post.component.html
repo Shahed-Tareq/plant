@@ -1,0 +1,19 @@
+<div>
+    <div >
+        <p class="mb-4">  {{"community.askNote" | translate}}<i class="fa-regular fa-pen-to-square ms-1"></i></p>
+        <form>
+            <div>
+                <label class="font-semibold">{{"community.postTitle" | translate}} </label>
+                <input type="text" pInputText placeholder="{{'community.postTitle' | translate}}" class="w-full mt-2 placeholder:text-sm" />
+            </div>
+            <div class="mt-4">
+                <label class="font-semibold">{{"community.postDescription" | translate}} </label>
+                <textarea rows="6" cols="30" pInputTextarea  class="w-full mt-2 placeholder:text-sm" placeholder="{{'community.postDescription' | translate}}"></textarea>
+            </div>
+            <div class="mt-4 flex justify-center items-center">
+                <app-button text="{{'community.submit' | translate}}" (clickButton)="addPost()"></app-button>
+                
+              </div>
+        </form>
+    </div>
+</div>

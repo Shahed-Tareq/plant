@@ -1,0 +1,23 @@
+<div >
+    <div class="category-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>Category Image</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories">
+              <td>{{ category.name }}</td>
+              <td><img src="{{ category.image }}" alt="{{ category.name }} Image" class="category-image"></td>
+              <td><button (click)="editCategory(category)">Edit</button></td>
+              <td><button (click)="removeCategory(category)">Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+</div>

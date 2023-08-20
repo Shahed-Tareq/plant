@@ -1,0 +1,31 @@
+
+    <div class="plant-table">
+      <h1>  Plant Details </h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Plant Name</th>
+              <th>Care Details</th>
+              <th>Medical Benefits</th>
+              <th>Image</th>
+              <th>Category ID</th>
+              <th>Season</th>
+              <th>Edit</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let plant of plants">
+              <td>{{plant.name}}</td>
+              <td>{{plant.careDetails}}.</td>
+              <td>{{plant.medicalBenefits}}</td>
+              <td><img [src]="plant.image" alt="Sunflower"></td>
+              <td>{{plant.categoryId}}</td>
+              <td>{{plant.season}}</td>
+              <td><button (click)="editCategory(plant)">Edit</button></td>
+              <td><button (click)="removeCategory(plant)">Remove</button></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
