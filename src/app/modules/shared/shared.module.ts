@@ -8,26 +8,33 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from './components/button/button.component';
 import { ChangeImageDirective } from './directives/change-image.directive';
+import { LoaderComponent } from './components/loader/loader.component';
+import { TextLengthPipe } from './pipes/text-length.pipe';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 
-const components = [CategoryComponent , PlantComponent]
-const modules = [FontAwesomeModule , PrimengModule ,  FormsModule,TranslateModule ,ReactiveFormsModule]
+const components = [CategoryComponent , PlantComponent , LoaderComponent]
+const modules = [FontAwesomeModule , PrimengModule , AgGridModule, FormsModule,TranslateModule ,ReactiveFormsModule]
 @NgModule({
   declarations: [
     ...components,
     ChangeImageDirective,
+    TextLengthPipe,
+    
     
   ],
   imports: [
     CommonModule,
    ...modules,
-   ButtonComponent
+   ButtonComponent,
+   
   ] ,
   exports:[
     ...modules,
     ...components,
-    ChangeImageDirective
+    ChangeImageDirective,
+    TextLengthPipe
   ]
 })
 export class SharedModule { }

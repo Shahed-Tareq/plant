@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AdminService } from '../../services/admin.service';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-add-category',
@@ -9,7 +11,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AddCategoryComponent implements OnInit{
   addCategoryForm!:FormGroup;
   imageCategory:any;
-  constructor(private _fB:FormBuilder){}
+  categoryImageEdit:any;
+  message: any;
+  constructor(private _fB:FormBuilder , private adminService: AdminService, private ref: DynamicDialogRef){}
 
 
   ngOnInit(): void {
@@ -21,13 +25,15 @@ export class AddCategoryComponent implements OnInit{
     this.addCategoryForm = this._fB.group({
       category_name: [''],
       short_description: [''],
-      image: ['']
+      image: [''],
+      CategoryNameAr:[''],
+      DescriptionAr:['']
     })
   }
 
   public hasImage:boolean = false;
 public isExist:boolean = false;
-public CategoryImage:string = ''
+
 
 public selectPhoto(event:any){
 this.hasImage = true;
@@ -35,7 +41,7 @@ const file = <File>event.target.files[0];
 this.imageCategory = file;
 var reader = new FileReader();
 reader.onload = (data: any) => {
- this.CategoryImage = data.target.result;
+ this.categoryImageEdit = data.target.result;
 };
 reader.readAsDataURL(file);
 
@@ -43,11 +49,24 @@ reader.readAsDataURL(file);
 
 
 onSubmit() {
+const categoryForm = this.addCategoryForm.value;
   const formData: FormData = new FormData();
-  formData.append('category_name', this.addCategoryForm.get('category_name')?.value);
-  formData.append('short_description', this.addCategoryForm.get('short_description')?.value);
-  formData.append('image', this.CategoryImage);
- 
+  formData.append('CategoryName', this.addCategoryForm.get('category_name')?.value);
+  formData.append('DescriptionAr', this.addCategoryForm.get('DescriptionAr')?.value);
+  formData.append('CategoryNameAr', this.addCategoryForm.get('CategoryNameAr')?.value);
+  formData.append('Description', this.addCategoryForm.get('short_description')?.value);
+  formData.append('ImageFile', this.imageCategory);
+  this.adminService.addCategory(formData).subscribe((result:any)=>{
+    if(result.isSuccess){
+      this.addCategoryForm.reset();
+      this.hasImage= false;
+      this.ref.close(categoryForm);
+    } else{
+      this.message = result.message;
+    }
+
+  })
+  
 }
 
 }

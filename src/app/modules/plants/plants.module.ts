@@ -5,6 +5,7 @@ import { PlantsRoutingModule } from './plants-routing.module';
 import { PlantDetailsComponent } from './components/plant-details/plant-details.component';
 
 
+
 @NgModule({
   declarations: [
     PlantDetailsComponent

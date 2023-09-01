@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -6,13 +6,27 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  public authService = inject (AuthService)
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken(); // Get the JWT token from your AuthService
 
-  constructor() {}
+    if (token) {
+      // Clone the request and add the Authorization header
+      const clonedRequest = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+      // Pass the cloned request to the next interceptor or to the HTTP handler
+      return next.handle(clonedRequest);
+    } else {
+      // If no token, pass the original request as-is
+      return next.handle(request);
+    }
   }
 }

@@ -1,47 +1,35 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '../../models/posts.model';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ViewPostComponent } from '../view-post/view-post.component';
+import { Datum } from '../../models/posts.model';
+import { Router } from '@angular/router';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
-  providers: [DialogService]
+  styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent{
 
-  @Input() public post !: Post;
-  public showAddCommentSection:boolean = false;
-  public ref: DynamicDialogRef | undefined;
-  private selectedPost!:Post
+  @Input() public post !: Datum;
   @Input()short:boolean = true;
   
-  constructor(public dialogService: DialogService){}
+  constructor(private router:Router , private postService: PostService){}
 
-  
-  commentClicked(){
-    this.showAddCommentSection = !this.showAddCommentSection;
+
+  viewPostDetails(postId:number){
+    this.router.navigate(['community/',postId])
+
+  }
+  likePost(postId:any , event:any){
+  event.stopPropagation();
+  this.postService.addLike(postId).subscribe((result:any)=>{
+  if(result.isSuccess){
+    this.post.likeCount = this.post.isLiked ? this.post.likeCount-1 : this.post.likeCount+1;
+    this.post.isLiked = !this.post.isLiked;
+  }
+})
   }
 
-  viewPost(post:Post) {
-    this.ref = this.dialogService.open(ViewPostComponent, {
-        header: 'Post Details',
-        width: '50%',
-        contentStyle: { overflow: 'auto' },
-        baseZIndex: 10000,
-        data:post,
-        styleClass:"post-popup"
-    });
 
-    this.ref.onClose.subscribe((post: Post) => {
-       
-    });
-}
 
-ngOnDestroy() {
-    if (this.ref) {
-        this.ref.close();
-    }
-}
 }

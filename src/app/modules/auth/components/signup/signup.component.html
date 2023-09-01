@@ -1,6 +1,6 @@
-<section class="">
+<section class="mt-[20px]">
     <div class="container">
-        <div class="flex md:justify-between xxs:justify-center items-center md:mt-[100px] xxs:mt-[90px]">
+        <div class="flex md:justify-between xxs:justify-center items-center">
             <div class="image w-full mr-6 md:block xxs:hidden" >
                 <img src="../../../../assets/images/login.jpg" class="w-full">
             </div>
@@ -26,29 +26,25 @@
                         </label>
                       </div>
 
-                    <div class="mb-2">
-                        <input type="text" pInputText placeholder="{{ 'auth.name' | translate}}" formControlName="name" class="w-full placeholder:text-sm text-sm py-2" />
+                    <div class="mb-2  h-[60px]">
+                        <input type="text" pInputText placeholder="{{ 'auth.name' | translate}}" formControlName="name" class="w-full placeholder:text-sm text-sm" />
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('name')?.hasError('required') && (signupForm.get('name')?.touched || submitted)"> {{"general.required" | translate}}</span>
                     </div>
-                    <div class="mb-2">
-                       <input type="text" pInputText placeholder="{{ 'auth.userName' | translate}}"formControlName="userName" class="w-full placeholder:text-sm text-sm py-2" />
+                    <div class="mb-2  h-[60px]">
+                       <input type="text" pInputText placeholder="{{ 'auth.userName' | translate}}"formControlName="userName" class="w-full placeholder:text-sm text-sm" />
                        <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('userName')?.hasError('required') && (signupForm.get('userName')?.touched || submitted)"> {{"general.required" | translate}}</span>
                     </div>
-                    <div class="mb-2">
-                        <input type="email" pInputText placeholder="{{ 'auth.email' | translate}}" class="w-fullplaceholder:text-sm text-sm py-2" formControlName="email"/>
+                    <div class="mb-2 h-[60px]">
+                        <input type="email" pInputText placeholder="{{ 'auth.email' | translate}}" class="w-fullplaceholder:text-sm text-sm" formControlName="email"/>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('email')?.hasError('required') && (signupForm.get('email')?.touched || submitted)"> {{"general.required" | translate}}</span>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('email')?.hasError('pattern') && (signupForm.get('email')?.touched || submitted)"> {{"general.pattern" | translate}}</span>
                     </div>
-                    <div class="mb-2">
-                        <p-dropdown [options]="users" optionLabel="name" optionValue="code" class="w-full  placeholder:text-sm text-sm py-2" placeholder="User Type" formControlName="userType"></p-dropdown>
-                        <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('userType')?.hasError('required') && (signupForm.get('userType')?.touched || submitted)"> {{"general.required" | translate}}</span>
-                    </div>
-                    <div class="mb-2">
-                        <input type="text" pInputText placeholder="{{'auth.phoneNo' | translate}}" class="w-full placeholder:text-sm text-sm py-2" formControlName="phone"/>
+                    <div class="mb-2  h-[60px]">
+                        <input type="text" pInputText placeholder="{{'auth.phoneNo' | translate}}" class="w-full placeholder:text-sm text-sm" formControlName="phone"/>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('phone')?.hasError('required') && (signupForm.get('phone')?.touched || submitted)"> {{"general.required" | translate}}</span>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('phone')?.hasError('pattern') && (signupForm.get('phone')?.touched || submitted)"> {{"general.pattern" | translate}}</span>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2 h-[60px]">
                       <p-password 
                         [feedback]="false"
           [toggleMask]="true" class="w-full  placeholder:text-sm text-sm py-2" formControlName="password"></p-password>

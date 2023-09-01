@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { ViewCategoriesComponent } from './view-categories/view-categories.component';
 import { SharedModule } from '../shared/shared.module';
+import { CategoryPlantsComponent } from './category-plants/category-plants.component';
 
 
 
 @NgModule({
   declarations: [
-    ViewCategoriesComponent
+    ViewCategoriesComponent,
+    CategoryPlantsComponent
   ],
   imports: [
     CommonModule,

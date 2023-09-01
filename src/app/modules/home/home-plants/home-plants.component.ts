@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../../shared/models/category.model';
-import { ImageServiceService } from '../services/image-service.service';
+import { CommonService } from '../../shared/services/common.service';
+import { GetAllPlantsResponse, PlantsDetails } from '../../plants/models/getPlant-response.model';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-home-plants',
@@ -10,49 +11,44 @@ import { ImageServiceService } from '../services/image-service.service';
   <h4 class="title md:text-2xl xxs:text-xl font-bold text-[#070404ba] mt-6"> {{"community.plants" | translate}} </h4>
   <p class="mb-6 text-[#665f5f] font-regular"> Lorem ipsum dolor sit amet consectetur,  sit libero animi nobis, similique</p>
 
-<p-carousel [value]="categories.slice(0, 8)" [numVisible]="4" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
-    <ng-template let-category pTemplate="item">
-    <div class="border-1 surface-border border-round m-2  py-5 px-3">
-    <app-plant [categoryObject]="category"> </app-plant>
+<!-- <div class="border-1 surface-border border-round m-2  py-5 px-3">
+    <app-plant [plantObject]="plant"> </app-plant>
+</div> -->
+<div class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2">
+    <div *ngFor="let plant of plants.slice(0, 4)">
+    <app-plant [plantObject]="plant"> </app-plant>
+     
 </div>
-    </ng-template>
-</p-carousel>
 
-    </div>
+</div>
   `,
   styles: [
   ]
 })
 export class HomePlantsComponent implements OnInit {
-  public categories:Category[] = [];
+  public plants:PlantsDetails[] = [];
   responsiveOptions!: any[];
-  constructor(private imageService: ImageServiceService){
+  langId:any;
+  constructor(private commonService: CommonService , private langService: LanguageService){
 
   }
 
   ngOnInit(): void {
-    this.imageService.getImages().then((images) => (this.categories = images));
-    this.responsiveOptions = [
-      {
-          breakpoint: '1199px',
-          numVisible: 3,
-          numScroll: 1
-      },
-      {
-          breakpoint: '991px',
-          numVisible: 2,
-          numScroll: 1
-      },
-      {
-          breakpoint: '767px',
-          numVisible: 1,
-          numScroll: 1
-      },
-      {
-        breakpoint: '400px',
-        numVisible: 1,
-        numScroll: 1
-    }
-  ];
+   this.langService.languageChange.subscribe(newLang=>{
+    const lang = newLang == 'en' ? 1 : 2;
+    this.getAllPlants(lang)
+   })
+   const result = localStorage.getItem('lang')
+   const lang = result == 'ar' ? 2 : 1;
+   this.getAllPlants(lang)
+
+  }
+
+  getAllPlants(langId:any){
+    this.commonService.getAllPlants(langId).subscribe((result:GetAllPlantsResponse)=>{
+      if(result.isSuccess){
+this.plants = result.data;
+      }
+    })
   }
 }

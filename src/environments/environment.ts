@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: '',
+  apiUrl: 'http://ayalilly-001-site1.atempurl.com/api',
 
 }
 

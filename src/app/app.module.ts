@@ -10,6 +10,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
+    AgGridModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageServiceService } from '../services/image-service.service';
-import { Category } from '../../shared/models/category.model';
 import { Router } from '@angular/router';
+import { CommonService } from '../../shared/services/common.service';
+import { CategoryDetails, CategoryResponse } from '../../shared/models/category-response.mdoel';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-home-categories',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
       <h4 class="title md:text-2xl xxs:text-xl font-bold text-[#070404ba] my-6"> {{"header.categories" | translate}} </h4>
     <div class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2">
     <div *ngFor="let category of categories.slice(0, 4)">
-     <app-category [categoryObject]="category"> </app-category>
+     <app-category [categoryObject]="category" (categoryClicked)="showPlants($event)"> </app-category>
      
 </div>
 
@@ -24,18 +25,36 @@ import { Router } from '@angular/router';
   ]
 })
 export class HomeCategoriesComponent implements OnInit {
-  public categories:Category[] = [];
+  public categories:CategoryDetails[] = [];
+  lang: any;
   
-  constructor(private imageService: ImageServiceService , private router:Router){
+  constructor(private router:Router , private commonService: CommonService , private langService:LanguageService){
 
   }
 
   ngOnInit(): void {
-    this.imageService.getImages().then((images) => (this.categories = images));
+    this.langService.languageChange.subscribe(newLang => {
+      const lang = newLang == 'ar' ? 2 : 1;
+      this.getAllCategories(lang)
+    });
+    const result = localStorage.getItem('lang')
+    const lang = result == 'ar' ? 2 : 1;
+    this.getAllCategories(lang)
+    
   }
 
 
    public navigateToCategories():void{
   this.router.navigate(['/categories'])
+   }
+
+   private getAllCategories(langId:any){
+this.commonService.getAllCategories(langId).subscribe((result:CategoryResponse)=>{
+this.categories = result?.data;
+})
+   }
+
+   showPlants(catId:number){
+    this.router.navigate(['/categories',catId])
    }
 }

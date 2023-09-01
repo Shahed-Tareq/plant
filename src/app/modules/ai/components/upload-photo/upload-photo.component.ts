@@ -11,7 +11,6 @@ export class UploadPhotoComponent {
   public plantImage:string = ''
 
  public selectPhoto(event:any){
- console.log(event)
  this.hasImage = true;
  const file = <File>event.target.files[0];
  var reader = new FileReader();

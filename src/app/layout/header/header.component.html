@@ -6,12 +6,10 @@
             </div>
  <div>
     <ul class="list-none flex justify-between items-center">
-        <li class="mr-6 text-sm"> <a [routerLink]="'/'" class="hover:text-green"> {{'header.home'| translate }}</a></li>
-        <li  class="mr-6 text-sm"> <a [routerLink]="'/about'" class="hover:text-green "> {{'header.about'| translate }}</a></li>
-        <li  class="mr-6 text-sm"> <a [routerLink]="'/categories'" class="hover:text-green "> {{'header.categories'| translate }}</a></li>
-        <li  class="mr-6 text-sm"> <a class="hover:text-green "[routerLink]="'/ai'"> {{'header.upload'| translate }}</a></li>
-        <li  class="mr-6 text-sm"> <a class="hover:text-green" [routerLink]="'/community'"> {{'header.community'| translate }}</a></li>
-        <li class="cursor-pointer mr-6" (click)="op.toggle($event)"> <i class="fa-solid fa-globe"></i> </li>
+        <ng-container *ngFor="let item of items">
+            <li class="mr-6 text-sm"  *ngIf="userType == item.userTyp"> <a [routerLink]="item.url" class="hover:text-green"> {{item.label }}</a></li>
+        </ng-container>
+        <li class="cursor-pointer mr-6" (click)="op.toggle($event)" *ngIf="userType != 3"> <i class="fa-solid fa-globe"></i> </li> 
         <p-overlayPanel #op>
     <ng-template pTemplate="content">
        <ul>
@@ -25,8 +23,9 @@
     </ul>
  </div>
  <div class="flex justify-start items-center">
-    <button class="mr-4 bg-black text-white py-2 px-4 rounded-full me-2" [routerLink]="'/auth'" > {{'header.login'| translate }} </button>
-    <button [routerLink]="'/auth/signup'">{{'header.signup'| translate }}</button>
+    <button *ngIf="!authService.loggedIn()" class="mr-4 bg-black text-white py-2 px-4 rounded-full me-2" [routerLink]="'/auth'" > {{'header.login'| translate }} </button>
+    <button *ngIf="!authService.loggedIn()" [routerLink]="'/auth/signup'">{{'header.signup'| translate }}</button>
+    <button *ngIf="authService.loggedIn()" class="mr-4 bg-black text-white py-2 px-4 rounded-full me-2" (click)="authService.logout()" > {{'header.logout'| translate }} </button>
  </div>
         </div>
 
@@ -43,10 +42,13 @@
 </header>
 <div class="w-full bg-black  fixed top-14 z-40 py-6" *ngIf="showItemList"  [@slideDown]>
     <ul>
-        <li class="text-sm px-3 py-2"> <a [routerLink]="'/'" class="hover:text-green text-white"> {{'header.home'| translate }}</a></li>
-        <li  class=" text-sm px-3 py-2"> <a [routerLink]="'/about'" class="hover:text-green text-white"> {{'header.about'| translate }}</a></li>
+        <ng-container *ngFor="let item of items">
+            <li class="text-sm px-3 py-2"  *ngIf="userType == item.userTyp"> <a [routerLink]="item.url" class="hover:text-green text-white"> {{item.label}}</a></li>
+        </ng-container>
+       
+        <!-- <li  class=" text-sm px-3 py-2"> <a [routerLink]="'/about'" class="hover:text-green text-white"> {{'header.about'| translate }}</a></li>
         <li  class="text-sm px-3 py-2"> <a [routerLink]="'/categories'" class="hover:text-green text-white"> {{'header.categories'| translate }}</a></li>
         <li  class="text-sm px-3 py-2"> <a [routerLink]="'/ai'" class="hover:text-green text-white"> {{'header.upload'| translate }}</a></li>
-        <li  class="text-sm px-3 py-2"> <a class="hover:text-green text-white" [routerLink]="'/community'"> {{'header.community'| translate }}</a></li>
+        <li  class="text-sm px-3 py-2"> <a class="hover:text-green text-white" [routerLink]="'/community'"> {{'header.community'| translate }}</a></li> -->
     </ul>
 </div>

@@ -1,14 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CategoryDetails } from '../../models/category-response.mdoel';
 
 @Component({
   selector: 'app-category',
   template: `
-   <div class="card bg-white rounded overflow-hidden shadow-md" [@hoverAnimation]="animationState" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"> 
-    <img [src]="categoryObject.itemImageSrc" class="w-full h-80 object-cover"> 
+   <div class="card bg-white rounded overflow-hidden shadow-md" [@hoverAnimation]="animationState" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="getPlantByCatId(categoryObject.id)"> 
+    <img [src]="'http://ayalilly-001-site1.atempurl.com/'+categoryObject.image" class="w-full h-80 object-cover"> 
     <div class="py-4 px-2">
-      <h3>{{categoryObject.title}}</h3>
+      <h3>{{categoryObject.categoryName}}</h3>
 </div>
   `,
  animations: [
@@ -34,8 +35,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 
 export class CategoryComponent {
-@Input() categoryObject : Category = {} as Category;
-
+@Input() categoryObject : CategoryDetails = {} as CategoryDetails;
+@Output () categoryClicked = new EventEmitter();
 animationState = 'initial';
 
   onMouseEnter() {
@@ -44,5 +45,9 @@ animationState = 'initial';
 
   onMouseLeave() {
     this.animationState = 'initial';
+  }
+
+ public getPlantByCatId(id:number){
+   this.categoryClicked.emit(id)
   }
 }

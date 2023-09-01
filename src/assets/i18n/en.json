@@ -8,7 +8,11 @@
       "login": "Login",
       "signup":"Sign Up",
       "arabic":"Arabic",
-      "english":"English"
+      "english":"English",
+      "logout":"Logout",
+     "plants":"Plants",
+     "users":"Users",
+     "favorite":"favorite"
 }, 
 "about":{
   "welcome": "Welcome to our website!",
@@ -46,7 +50,10 @@
   "userName":"Username",
   "userType" : "User Type" ,
   "phoneNo" : "Phone Number",
-  "password":"Password"
+  "password":"Password",
+  "code":"Code",
+  "verify" :"Enter Verification Code",
+  "verifyTitle":"We've sent a verification code to your email. Please enter it below:"
 },
 "community":{
   "topPosts" :"Top Posts",
@@ -58,7 +65,11 @@
   "postTitle" :"Post Title",
   "postDescription" :"Post Description",
   "comments":"Comments",
-  "submit" :"Submit"
+  "submit" :"Submit",
+  "like" :"Like",
+  "likes" :"Likes",
+  "addComment" :"Add Comment",
+  "comment" :"Comment"
 } , 
 "home":{
   "plantCare" :"Plant Hub ",
@@ -74,6 +85,15 @@
 "general":{
   "required" :" This field is required",
   "pattern" :"Please enter valid format",
-  "errorCode" : "Invalid Code"
+  "errorCode" : "Invalid Code",
+  "confirm" : "MisMatch Confirmation",
+  "searchTitle" : "Easily find exactly what you're looking for by searching through our diverse range of categories, ensuring the best results for your needs"
+},
+"resetPassword":{
+  "reset" : "Reset Password",
+  "sendEmail":"We've sent a reset code to your email for password recovery.",
+  "codeVerification":"Please check your inbox for further instructions on resetting your password",
+  "submitEmail":"To reset your password, please enter your registered email address.",
+  "submitCode" :"Your code has been successfully submitted. Please enter your new password."
 }
 }

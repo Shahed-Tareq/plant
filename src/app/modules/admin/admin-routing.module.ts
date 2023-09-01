@@ -5,6 +5,8 @@ import { AddCategoryComponent } from './components/add-category/add-category.com
 import { AddPlanetComponent } from './components/add-planet/add-planet.component';
 import { ViewPlanetComponent } from './components/view-planet/view-planet.component';
 import { ViewCategoriesComponent } from './components/view-categories/view-categories.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 const routes: Routes = [
   {path:'' , component:AdminContainerComponent , children:[
@@ -13,6 +15,8 @@ const routes: Routes = [
     {path:'addPlant' , component:AddPlanetComponent},
     {path:'viewCategory' , component:ViewCategoriesComponent},
     {path:'viewPlant' , component:ViewPlanetComponent},
+    {path:'viewUser' , component:ViewUserComponent},
+    {path: 'addUser' , component: AddUserComponent}
   ]}
 ];
 

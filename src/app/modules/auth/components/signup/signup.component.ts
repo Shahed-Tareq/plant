@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputPatterns } from 'src/app/modules/shared/utils/validation-pattern';
+import { AuthService } from '../../services/auth.service';
+import { LoaderComponent } from 'src/app/modules/shared/components/loader/loader.component';
 interface User {
   name: string;
   code: string;
@@ -19,7 +21,7 @@ signupForm!:FormGroup;
 
 imageForm!:FormGroup;
 
-constructor(private router:Router , private fb:FormBuilder){
+constructor(private router:Router , private fb:FormBuilder , private authService: AuthService){
   
 }
 ngOnInit(): void {
@@ -38,12 +40,16 @@ public signup(){
     const formData: FormData = new FormData();
     formData.append('FullName',userData?.name);
     formData.append('Password', userData?.password);
-    formData.append('UserType',userData?.userType);
+    formData.append('UserType','2');
     formData.append('Email', userData?.email);
     formData.append('PhoneNumber', userData?.phone);
-    formData.append('Username', userData?.userName);
-    formData.append('Image', this.userImage);
-    this.router.navigate(['/auth/confirm'])
+    formData.append('UserName', userData?.userName);
+    formData.append('ImageFile', this.userImage);
+    this.authService.signUp(formData).subscribe((result:any)=>{
+    localStorage.setItem('email' ,  userData?.email)
+      this.router.navigate(['/auth/confirm'])
+    })
+   
   } else{
     
   }
@@ -70,7 +76,6 @@ private signupFormInitialization():void{
     email: new FormControl('' , [Validators.required , Validators.pattern(InputPatterns.emailPattern)]),
     password: new FormControl('' , [Validators.required, Validators.pattern(InputPatterns.passwordPattern) ]),
     name: new FormControl('ff' , Validators.required),
-    userType: new FormControl('' , Validators.required),
     phone: new FormControl('' , [Validators.required , Validators.pattern(InputPatterns.numberPattern)]),
     userName: new FormControl('' , Validators.required),
     userImage: new FormControl('')

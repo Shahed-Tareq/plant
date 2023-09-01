@@ -11,7 +11,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ToastModule } from 'primeng/toast';
 const modules = [
+  ToastModule,
   GalleriaModule,OverlayPanelModule,InputNumberModule,
   ButtonModule,CarouselModule,InputTextModule,InputTextareaModule,PasswordModule,DropdownModule,TabMenuModule,DynamicDialogModule
 ]

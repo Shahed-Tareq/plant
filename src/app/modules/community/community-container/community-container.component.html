@@ -3,7 +3,7 @@
         <div class="grid grid-cols-5 gap-6 xxs:grid-cols-1 lg:grid-cols-5">
             <div class="bg-white shadow-2xl h-screen  rounded-lg  flex-start  flex-col py-4 xxs:hidden lg:flex">
                 <h6 class="text-xl font-bold mb-4 text-center">{{"community.topPosts" | translate}}</h6>
-               <p *ngFor="let post of posts" class="text-sm px-4 mb-3 text-[#000000b3] hover:cursor-pointer hover:text-black"><a>{{post.title}}</a></p>
+               <p *ngFor="let post of posts" class="text-sm px-4 mb-3 text-[#000000b3] hover:cursor-pointer hover:text-black"><a [routerLink]="[post.postId]">{{post.postTitel | textLength: 20}}</a></p>
             </div>
             <div class="bg-white col-span-3 scrollable-div shadow-black p-2 router-section h-screen overflow-auto">
              <div class="header">

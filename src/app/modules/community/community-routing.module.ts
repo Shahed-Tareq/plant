@@ -4,13 +4,16 @@ import { CommunityContainerComponent } from './community-container/community-con
 import { AllpostsComponent } from './components/allposts/allposts.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { MypostComponent } from './components/mypost/mypost.component';
+import { ViewPostComponent } from './components/view-post/view-post.component';
 
 const routes: Routes = [
   {path:'' , component:CommunityContainerComponent , children:[
     {path: '' , component:AllpostsComponent , pathMatch:'full'},
     {path: 'addPost' , component:CreatePostComponent, pathMatch:'full'},
     {path: 'myPost' , component:MypostComponent,pathMatch:'full'},
-  ]}
+    {path: ':id' , component: ViewPostComponent}
+  ]} ,
+ 
 ];
 
 @NgModule({
