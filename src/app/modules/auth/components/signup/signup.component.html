@@ -56,7 +56,7 @@
                  
                  
                     <div class="my-4">
-                        <app-button text="{{'auth.signup' | translate}}" (clickButton)="signup()"></app-button>
+                        <app-button text="{{'auth.signup' | translate}}" (clickButton)="signup()" [isLoading]="loading"></app-button>
                         </div>
                 </form>
             </div>
