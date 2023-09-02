@@ -29,7 +29,7 @@ import { AgGridModule } from 'ag-grid-angular';
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
+            useFactory: createTranslateLoader,
             deps: [HttpClient]
         }
     })
@@ -43,6 +43,9 @@ import { AgGridModule } from 'ag-grid-angular';
 export class AppModule { }
 
 // required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
-}
+// export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+//   return new TranslateHttpLoader(http);
+// }
+export function createTranslateLoader(http:HttpClient){
+  return new TranslateHttpLoader(http , 'assets/i18n/' , '.json')
+  }
