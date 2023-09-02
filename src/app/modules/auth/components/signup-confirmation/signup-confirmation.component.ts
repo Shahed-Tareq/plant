@@ -22,7 +22,7 @@ constructor(private authService: AuthService , private router: Router){}
   }
 
 confirmEmail(){
-  this.authService.confirmEmail({confirmationCode:this.code , email: this.email}).subscribe((result:any)=>{
+  this.authService.confirmEmail({code:this.code , email: this.email}).subscribe((result:any)=>{
   if(result.isSuccess){
     this.router.navigate(['auth'])
   } else{
