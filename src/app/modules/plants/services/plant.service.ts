@@ -12,8 +12,11 @@ export class PlantService {
     return this.httpRequestService.postRequest('SavePlant/SaveNewPlant' , plantId)
   }
 
-  getAllSavedPlants(){
-    return this.httpRequestService.getRequest('SavePlant/GetPreservedPlants')
+  getAllSavedPlants(langId:any){
+    return this.httpRequestService.getRequest('SavePlant/GetPreservedPlants' , {
+      params:{
+        langId: langId      }
+    })
   }
 
   searchPlantByCatId(PlantName:any , CategoryId:any , langId:any){

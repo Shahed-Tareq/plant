@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlantsDetails } from 'src/app/modules/plants/models/getPlant-response.model';
 import { PlantService } from 'src/app/modules/plants/services/plant.service';
 import { CommonService } from 'src/app/modules/shared/services/common.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-saved-plant',
@@ -12,15 +13,28 @@ export class SavedPlantComponent implements OnInit{
 
   public searchTerm!:string;
   plants!:PlantsDetails[];
-
-  constructor(private plantService: PlantService){}
+lang:any;
+  constructor(private plantService: PlantService , private langService:LanguageService){}
 
   ngOnInit(): void {
-  this.plantService.getAllSavedPlants().subscribe((result:any)=>{
+
+
+    this.langService.languageChange.subscribe(newLang => {
+      this.lang = newLang == 'ar' ? 2 : 1;
+      this.getAllSavedPlant(this.lang)
+    });
+    
+    const result = localStorage.getItem('lang')
+    this.lang = result == 'ar' ? 2 : 1;
+    this.getAllSavedPlant(this.lang)
+
+ 
+  }
+getAllSavedPlant(langId:any){
+  this.plantService.getAllSavedPlants(langId).subscribe((result:any)=>{
     this.plants = result.data;
   })
-  }
-
+}
 
 
 }

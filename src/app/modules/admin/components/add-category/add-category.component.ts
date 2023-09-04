@@ -13,11 +13,24 @@ export class AddCategoryComponent implements OnInit{
   imageCategory:any;
   categoryImageEdit:any;
   message: any;
-  constructor(private _fB:FormBuilder , private adminService: AdminService, private ref: DynamicDialogRef){}
+  constructor(private _fB:FormBuilder , private adminService: AdminService, private ref: DynamicDialogRef, private dynamicConfig: DynamicDialogConfig){}
 
 
   ngOnInit(): void {
     this.FormInitialization();
+    console.log(this.dynamicConfig.data)
+    this.patchValue()
+  }
+  patchValue() {
+    // const data = this.dynamicConfig.data;
+    // if (data){
+    //   this.addCategoryForm.patchValue({
+    //     category_name: data.CategoryName,
+    //     short_description: data.Description,
+    //     CategoryNameAr:data.CategoryName,
+    //     DescriptionAr:data.CategoryName
+    //   })
+    // }
   }
 
 

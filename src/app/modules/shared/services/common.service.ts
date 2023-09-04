@@ -61,7 +61,7 @@ return this.httpRequestService.deleteRequest('Category/DeleteCategoty' , {
 removePlant(plantId:any){
 return this.httpRequestService.deleteRequest('Plant/DeletePlant' , {
   params: {
-    categoryId:plantId
+    plantId:plantId
   }
 })
 }

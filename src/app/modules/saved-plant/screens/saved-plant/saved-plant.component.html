@@ -7,10 +7,13 @@
   
     </div>
  <div class="container" >
-    <ng-container class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2" *ngIf="plants && plants.length > 0; else noContent">
-        <div *ngFor="let plant of plants">
-        <app-plant [plantObject]="plant" [showSaveItem]="false"> </app-plant>
-    </div>
+    <ng-container *ngIf="plants && plants.length > 0; else noContent">
+        <div  class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2">
+            <div *ngFor="let plant of plants">
+                <app-plant [plantObject]="plant" [showSaveItem]="false"> </app-plant>
+            </div>
+        </div>
+    
     </ng-container>
 <ng-template #noContent>
 <p> No saved Plants</p>

@@ -12,6 +12,9 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from '../shared/components/button/button.component';
+import { CategoryButtonsComponent } from './components/category-buttons/category-buttons.component';
+import { PlantButtonsComponent } from './components/plant-buttons/plant-buttons.component';
+import { UserButtonsComponent } from './components/user-buttons/user-buttons.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { ButtonComponent } from '../shared/components/button/button.component';
     ViewPlanetComponent,
     AdminContainerComponent,
     ViewUserComponent,
-    AddUserComponent
+    AddUserComponent,
+    CategoryButtonsComponent,
+    PlantButtonsComponent,
+    UserButtonsComponent
   ],
   imports: [
     CommonModule,

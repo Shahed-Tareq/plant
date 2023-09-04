@@ -5,6 +5,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { UserButtonsComponent } from '../user-buttons/user-buttons.component';
 
 @Component({
   selector: 'app-view-user',
@@ -51,11 +52,12 @@ this.userService.removeUser(userId.toString()).subscribe((result:any)=>{
       {field:'image' , headerName:'Plant Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
       return `<img src="http://ayalilly-001-site1.atempurl.com/${params.value}" width="50px" hight="50px">`
       }},
-      {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1},
+      {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1 , cellRenderer: UserButtonsComponent},
     ]
   }
 
   gridOptions:GridOptions<any> = {
+    context: { componentParent: this },
       rowSelection: 'multiple',
       domLayout: 'autoHeight',
       pagination: true,

@@ -10,13 +10,10 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 
 const routes: Routes = [
   {path:'' , component:AdminContainerComponent , children:[
-    {path: '' , redirectTo:'addCategory' , pathMatch:'full'},
-    {path:'addCategory' , component:AddCategoryComponent},
-    {path:'addPlant' , component:AddPlanetComponent},
+    {path: '' , redirectTo:'viewCategory' , pathMatch:'full'},
     {path:'viewCategory' , component:ViewCategoriesComponent},
     {path:'viewPlant' , component:ViewPlanetComponent},
-    {path:'viewUser' , component:ViewUserComponent},
-    {path: 'addUser' , component: AddUserComponent}
+    {path:'viewUser' , component:ViewUserComponent}
   ]}
 ];
 

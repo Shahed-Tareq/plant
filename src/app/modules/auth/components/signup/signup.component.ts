@@ -44,6 +44,7 @@ public signup(){
     this.authService.signUp(formData).subscribe((result:any)=>{
 if(result.isSuccess){
   localStorage.setItem('email' ,  userData?.email)
+  localStorage.setItem('userData' , JSON.stringify(result.data))
   this.router.navigate(['/auth/confirm'])
   this.loading = false;
 } else{

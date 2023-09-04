@@ -8,6 +8,7 @@ import { PlantService } from 'src/app/modules/plants/services/plant.service';
 import { CommonService } from 'src/app/modules/shared/services/common.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { AddPlanetComponent } from '../add-planet/add-planet.component';
+import { PlantButtonsComponent } from '../plant-buttons/plant-buttons.component';
 
 @Component({
   selector: 'app-view-planet',
@@ -40,7 +41,9 @@ constructor(private messageService:MessageService  , private dialogService: Dial
 
   removePlant(plantId: any) {
     this.commonService.removePlant(plantId).subscribe((result:any)=>{
-       this.rowData = this.rowData.filter(item => item.plantId !== plantId);
+       if(result.isSuccess){
+        this.rowData = this.rowData.filter(item => item.plantId !== plantId);
+       }
       
          })
   }
@@ -73,10 +76,11 @@ columnInitialization(){
     {field:'plantImage' , headerName:'Plant Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
     return `<img src="http://ayalilly-001-site1.atempurl.com/${params.value}" width="50px" hight="50px">`
     }},
-    {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1},
+    {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1 , cellRenderer: PlantButtonsComponent},
   ]
 }
 gridOptions:GridOptions<any> = {
+  context: { componentParent: this },
   rowSelection: 'multiple',
   domLayout: 'autoHeight',
   pagination: true,

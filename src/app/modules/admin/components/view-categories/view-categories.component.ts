@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/modules/shared/services/common.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { MessageService } from 'primeng/api';
+import { CategoryButtonsComponent } from '../category-buttons/category-buttons.component';
 
 @Component({
   selector: 'app-view-categories',
@@ -41,15 +42,19 @@ export class ViewCategoriesComponent implements OnInit{
   }
   
 
-  editCategory(categoryId: any) {
+  updateCategory(category: any) {
     // Handle edit logic here
+    this.ref = this.dialogService.open(AddCategoryComponent, { header: 'add Category' , styleClass:'addCategory' , data:{
+      category:category
+    }});
+
  
   }
 
   removeCategory(categoryId: any) {
     // Handle remove logic here
     this.commonService.removeCategory(categoryId).subscribe((result:any)=>{
-      this.categories = this.categories.filter(item => item.id !== categoryId);
+      this.rowData = this.rowData.filter(item => item.id !== categoryId);
 
     })
   }
@@ -64,7 +69,7 @@ columnInitialization(){
     {field:'image' , headerName:'Category Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
     return `<img src="http://ayalilly-001-site1.atempurl.com/${params.value}" width="50px" hight="50px">`
     }},
-    {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1},
+    {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1 , cellRenderer:CategoryButtonsComponent},
   ]
 }
 
@@ -80,6 +85,7 @@ showAddCategory() {
 }
 
 gridOptions:GridOptions<any> = {
+  context: { componentParent: this },
   rowSelection: 'multiple',
   domLayout: 'autoHeight',
   pagination: true,
