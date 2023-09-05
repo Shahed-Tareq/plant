@@ -10,27 +10,32 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class AddCategoryComponent implements OnInit{
   addCategoryForm!:FormGroup;
-  imageCategory:any;
+  imageCategory:any = null;
   categoryImageEdit:any;
   message: any;
+  categoryDetails:any;
+  public isUpdate:boolean = false;
   constructor(private _fB:FormBuilder , private adminService: AdminService, private ref: DynamicDialogRef, private dynamicConfig: DynamicDialogConfig){}
 
 
   ngOnInit(): void {
     this.FormInitialization();
-    console.log(this.dynamicConfig.data)
+   this.categoryDetails = this.dynamicConfig.data.category
     this.patchValue()
   }
   patchValue() {
-    // const data = this.dynamicConfig.data;
-    // if (data){
-    //   this.addCategoryForm.patchValue({
-    //     category_name: data.CategoryName,
-    //     short_description: data.Description,
-    //     CategoryNameAr:data.CategoryName,
-    //     DescriptionAr:data.CategoryName
-    //   })
-    // }
+     const data = this.dynamicConfig.data;
+   if (data){
+    this.isUpdate = true;
+    this.addCategoryForm.patchValue({
+        category_name: data.category.categoryName,
+         short_description: data.category.description,
+        CategoryNameAr:data.category.categoryNameAr,
+         DescriptionAr:data.category.descriptionAr
+      })
+      this.hasImage = true;
+      this.categoryImageEdit = `http://ayalilly-001-site1.atempurl.com/${data.category.image}` 
+     }
   }
 
 
@@ -69,6 +74,16 @@ const categoryForm = this.addCategoryForm.value;
   formData.append('CategoryNameAr', this.addCategoryForm.get('CategoryNameAr')?.value);
   formData.append('Description', this.addCategoryForm.get('short_description')?.value);
   formData.append('ImageFile', this.imageCategory);
+ if(this.isUpdate){
+  formData.append('CategoryId', this.categoryDetails.id);
+  this.adminService.updateCategory(formData).subscribe((result:any)=>{
+    if(result.isSuccess){
+      this.addCategoryForm.reset();
+      this.hasImage= false;
+      this.ref.close(categoryForm);
+    }
+  })
+ } else{
   this.adminService.addCategory(formData).subscribe((result:any)=>{
     if(result.isSuccess){
       this.addCategoryForm.reset();
@@ -79,6 +94,7 @@ const categoryForm = this.addCategoryForm.value;
     }
 
   })
+ }
   
 }
 

@@ -18,5 +18,8 @@ export class PlantButtonsComponent implements ICellRendererAngularComp {
   removePlant(plantId:any){
     this.params.context.componentParent.removePlant(plantId);
   }
+  updatePlant(plant:any){
+    this.params.context.componentParent.updatePlant(plant);
+  }
 
 }

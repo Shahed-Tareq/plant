@@ -7,6 +7,8 @@ import { LanguageService } from 'src/app/services/language.service';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { MessageService } from 'primeng/api';
 import { CategoryButtonsComponent } from '../category-buttons/category-buttons.component';
+import { AdminService } from '../../services/admin.service';
+import { CategoriesAdminDetails, CategoriesAdminResponse } from '../../models/categories-admin.model';
 
 @Component({
   selector: 'app-view-categories',
@@ -15,44 +17,38 @@ import { CategoryButtonsComponent } from '../category-buttons/category-buttons.c
   providers: [DialogService , MessageService]
 })
 export class ViewCategoriesComponent implements OnInit{
-  public rowData:any[] = [];
+  public rowData:CategoriesAdminDetails[] = [];
   public columnDefs: ColDef[] =[];
   public categories!: CategoryDetails[];
-  public lang:any;
   ref: DynamicDialogRef | undefined;
-  constructor(private messageService:MessageService,private commonService: CommonService , private langService: LanguageService, public dialogService: DialogService){}
-
-
+  constructor(private adminService: AdminService,private messageService:MessageService,private commonService: CommonService , private langService: LanguageService, public dialogService: DialogService){}
   ngOnInit(): void {
     this.columnInitialization()
-    this.langService.languageChange.subscribe(newLang => {
-      this.lang = newLang == 'ar' ? 2 : 1;
-      this.getAllCategories(this.lang)
-    });
-    const result = localStorage.getItem('lang');
-    this.lang = result == 'ar' ? 2 : 1;
-    this.getAllCategories(this.lang)
+    this.getAllCategories()
   
 
   }
-  getAllCategories(langId:any) {
-   this.commonService.getAllCategories(langId).subscribe((result:any)=>{
+  getAllCategories() {
+   this.adminService.getCategoriesWithoutLang().subscribe((result:CategoriesAdminResponse)=>{
+    console.log(result)
     this.rowData = result.data;
    })
   }
   
 
   updateCategory(category: any) {
-    // Handle edit logic here
     this.ref = this.dialogService.open(AddCategoryComponent, { header: 'add Category' , styleClass:'addCategory' , data:{
       category:category
     }});
-
- 
+    this.ref.onClose.subscribe((product: any) => {
+      if (product) {
+         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated Successfully' });
+          this.getAllCategories()
+      }
+  });
   }
 
   removeCategory(categoryId: any) {
-    // Handle remove logic here
     this.commonService.removeCategory(categoryId).subscribe((result:any)=>{
       this.rowData = this.rowData.filter(item => item.id !== categoryId);
 
@@ -79,7 +75,7 @@ showAddCategory() {
   this.ref.onClose.subscribe((product: any) => {
     if (product) {
        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Adding Successfully' });
-        this.getAllCategories(this.lang)
+        this.getAllCategories()
     }
 });
 }

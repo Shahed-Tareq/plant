@@ -1,5 +1,10 @@
 <div class=" flex justify-start items-center gap-2">
-    <button (click)="removeUser(params.data.id)"><i class="fa-solid fa-trash-can"></i></button>
+    <button (click)="lockedUser(params.data.id)" *ngIf="!params.data.lockoutEnabled">
+        <i class="fa-solid fa-lock-open"></i>
+   </button>
+    <button (click)="unLockUser(params.data.id)" *ngIf="params.data.lockoutEnabled">
+        <i class="fa-solid fa-lock"></i>
+   </button>
     <button><i class="fa-regular fa-pen-to-square"></i></button>
     </div>
     

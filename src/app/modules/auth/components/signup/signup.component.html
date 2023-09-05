@@ -38,6 +38,7 @@
                         <input type="email" pInputText placeholder="{{ 'auth.email' | translate}}" class="w-fullplaceholder:text-sm text-sm" formControlName="email"/>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('email')?.hasError('required') && (signupForm.get('email')?.touched || submitted)"> {{"general.required" | translate}}</span>
                         <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="signupForm.get('email')?.hasError('pattern') && (signupForm.get('email')?.touched || submitted)"> {{"general.pattern" | translate}}</span>
+                        <span class="text-xs text-[#e54f4f] ps-[14px]" *ngIf="showEmailError">{{showEmailError}}</span>
                     </div>
                     <div class="mb-2  h-[60px]">
                         <input type="text" pInputText placeholder="{{'auth.phoneNo' | translate}}" class="w-full placeholder:text-sm text-sm" formControlName="phone"/>

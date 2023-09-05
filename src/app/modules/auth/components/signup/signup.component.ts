@@ -19,12 +19,15 @@ imageForm!:FormGroup;
 public hasImage:boolean = false;
 public isExist:boolean = false;
 public plantImage:string = ''
-
+public showEmailError!:string;
+public lang!:number;
 constructor(private router:Router , private fb:FormBuilder , private authService: AuthService){
   
 }
 ngOnInit(): void {
 this.signupFormInitialization()
+const result = localStorage.getItem('lang')
+this.lang = result == 'ar' ? 2 : 1;
  }
 
 public signup(){
@@ -49,6 +52,7 @@ if(result.isSuccess){
   this.loading = false;
 } else{
   this.loading = false;
+  this.showEmailError = this.lang == 1 ? result.message : 'الإيميل موجود مسبقاً'
 }
 }, (error) => {
   console.error('An error occurred:', error);

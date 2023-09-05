@@ -9,6 +9,8 @@ import { CommonService } from 'src/app/modules/shared/services/common.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { AddPlanetComponent } from '../add-planet/add-planet.component';
 import { PlantButtonsComponent } from '../plant-buttons/plant-buttons.component';
+import { AdminService } from '../../services/admin.service';
+import { PlantAdminDetails, PlantAdminResponse } from '../../models/plants-admin.model';
 
 @Component({
   selector: 'app-view-planet',
@@ -18,26 +20,28 @@ import { PlantButtonsComponent } from '../plant-buttons/plant-buttons.component'
 })
 export class ViewPlanetComponent  implements OnInit{
   private lang: any;
-  public rowData:any[]=[];
+  public rowData:PlantAdminDetails[]=[];
   public columnDefs:ColDef[]=[];
   ref: DynamicDialogRef | undefined;
-constructor(private messageService:MessageService  , private dialogService: DialogService,private plantService: PlantService , private commonService: CommonService , private langService: LanguageService){}
+constructor(private messageService:MessageService, private adminService: AdminService  , private dialogService: DialogService,private plantService: PlantService , private commonService: CommonService , private langService: LanguageService){}
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+{
   this.columnInitialization()
-  this.langService.languageChange.subscribe(langId=>{
-    this.lang = langId == 'ar' ? 2 : 1;
-    this.getPlants(this.lang)
-  })
-  const result = localStorage.getItem('lang');
-    this.lang = result == 'ar' ? 2 : 1;
-    this.getPlants(this.lang)
-  }
+  this.getPlants()
+}
 
-
-  editCategory(category: any) {
-    
-  }
+updatePlant(plant:any){
+  this.ref = this.dialogService.open(AddPlanetComponent, { header: 'add Plant' , styleClass:'' ,width:'80%', data:{
+    plant:plant
+  }});
+  this.ref.onClose.subscribe((plant: PlantAdminDetails) => {
+    if (plant) {
+       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated Successfully' });
+        this.getPlants()
+    }
+});
+}
 
   removePlant(plantId: any) {
     this.commonService.removePlant(plantId).subscribe((result:any)=>{
@@ -48,18 +52,19 @@ constructor(private messageService:MessageService  , private dialogService: Dial
          })
   }
 
-getPlants(langId:any){
-  this.commonService.getAllPlants(langId).subscribe((result:any)=>{
+getPlants(){
+  this.adminService.getPlantsWithoutLang().subscribe((result:PlantAdminResponse)=>{
+    console.log(result)
     this.rowData = result.data;
    
   })
 }
 public showAddPlant(){
   this.ref = this.dialogService.open(AddPlanetComponent, { header: 'add Plant' , styleClass:'' , width:'80%'});
-  this.ref.onClose.subscribe((plant: any) => {
+  this.ref.onClose.subscribe((plant: PlantAdminDetails) => {
     if (plant) {
        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Adding Successfully' });
-        this.getPlants(this.lang)
+        this.getPlants()
     }
 });
 }
@@ -67,12 +72,12 @@ public showAddPlant(){
 columnInitialization(){
   this.columnDefs = [
     {field:'#' , width:60 , valueGetter: 'node.rowIndex + 1'},
-    {field:'plantName' , headerName:'Plant Name' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-    {field:'plantDescription' , headerName:'Description' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-    {field:'plantSeason' , headerName:'Season' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-    {field:'plantCareDetails' , headerName:'Care Details' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-    {field:'plantMedicalBenefit' , headerName:'Medical Benefit' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-    {field:'plantCategory' , headerName:'Category' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantNameEn' , headerName:'Plant Name' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantDescriptionEn' , headerName:'Description' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantSeasonEn' , headerName:'Season' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantCareDetailsEn' , headerName:'Care Details' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantMedicalBenefiEntEn' , headerName:'Medical Benefit' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
+    {field:'plantCategoryEn' , headerName:'Category' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
     {field:'plantImage' , headerName:'Plant Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
     return `<img src="http://ayalilly-001-site1.atempurl.com/${params.value}" width="50px" hight="50px">`
     }},

@@ -8,7 +8,7 @@
       
         </div>
 <div class="container">
-   <h1 class="text-2xl font-bold">  {{category?.categoryName}} Category  </h1>
+   <h1 class="text-2xl font-bold">  {{category?.categoryName}}</h1>
     <ng-container *ngIf="plants && plants.length>0; else noContent">
         <div class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2">
             <div *ngFor="let plant of plants">
@@ -18,7 +18,10 @@
     </ng-container>
 
 <ng-template #noContent>
-    <p class="mt-5">No Plants related to {{category?.categoryName}} Category</p>
+    <p class="mt-5">{{'categories.noContent' | translate}}</p>
+    <div *ngIf="authService.loggedIn()">
+        <app-add-new-plant></app-add-new-plant>
+    </div>
 </ng-template>
 
  </div>

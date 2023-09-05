@@ -6,6 +6,7 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { UserButtonsComponent } from '../user-buttons/user-buttons.component';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-view-user',
@@ -17,7 +18,7 @@ export class ViewUserComponent implements OnInit{
   rowData:UserDetails[] = [];
   columnDefs: ColDef[] =[]
   ref: DynamicDialogRef | undefined;
-  constructor(private userService: UserService , private dialogService: DialogService , private messageService: MessageService){}
+  constructor(private adminService: AdminService,private userService: UserService , private dialogService: DialogService , private messageService: MessageService){}
   ngOnInit(): void {
     this.getAllUsers();
     this.columnInitialization()
@@ -65,4 +66,21 @@ this.userService.removeUser(userId.toString()).subscribe((result:any)=>{
       overlayLoadingTemplate: `<span> Loading ... </span>`,
     };
 
+
+    lockedUser(userId:any){
+      this.adminService.lockedUser({userId:userId}).subscribe((result:any)=>{
+        if(result.isSuccess){
+          this.getAllUsers()
+        }
+       
+      })
+    }
+    unLockUser(userId:any){
+      this.adminService.unLockedUser({userId:userId}).subscribe((result:any)=>{
+        if(result.isSuccess){
+          this.getAllUsers()
+        }
+       
+      })
+    }
 }

@@ -5,12 +5,14 @@ import { AiRoutingModule } from './ai-routing.module';
 import { UploadPhotoComponent } from './components/upload-photo/upload-photo.component';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from '../shared/components/button/button.component';
+import { ScrollDirective } from './directives/scroll.directive';
 
 
 
 @NgModule({
   declarations: [
-    UploadPhotoComponent
+    UploadPhotoComponent,
+    ScrollDirective
   ],
   imports: [
     CommonModule,

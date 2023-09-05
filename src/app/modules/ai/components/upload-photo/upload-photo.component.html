@@ -31,9 +31,9 @@
           />
         </label>
       </div>
-      <div class="mt-4">
+      <div class="mt-4" appScroll (reachedTarget)="load()" id="div-scroll">
         <app-button text="{{'upload.view' | translate}}" (clickButton)="showPlantName()" *ngIf="!isExist"></app-button>
-        <p class="w-full bg-[#6cd66c]  py-2 px-7 rounded-full" *ngIf="isExist"> {{"upload.title" | translate}} <span> Orange </span></p>
+        <p  class="w-full bg-[#6cd66c]  py-2 px-7 rounded-full" *ngIf="isExist"> {{"upload.title" | translate}} <span> Orange </span></p>
       </div>
      
      </div>

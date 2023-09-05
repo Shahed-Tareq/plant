@@ -1,8 +1,8 @@
 <ng-container *ngIf="posts ; else loading">
-    <div class="post rounded-md p-2 my-1 cursor-pointer  " *ngFor="let post of posts" (click)="viewPost(post.postId)">
+    <div class="post rounded-md p-2 my-1 cursor-pointer  " *ngFor="let post of posts">
         <div class="post-section hover:bg-[#615c5c17]">
-            <div class="mt-1" >
-                <p class="text-black font-bold mb-1">{{post.postTitel}}</p>
+            <div class="mt-1" (click)="viewPost(post.postId)" >
+                <p class="text-black font-bold mb-1">{{post.postTitel}} {{post.postId}}</p>
                <p class="text-[#000000b3] text-sm break-words">{{post.postContent | textLength: 100}}</p>
             </div>
            

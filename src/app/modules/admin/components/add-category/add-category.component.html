@@ -1,5 +1,5 @@
   <div class="w-full">
-    <form (ngSubmit)="onSubmit()" [formGroup]="addCategoryForm">
+    <form  [formGroup]="addCategoryForm">
       <span *ngIf="message">{{message}}</span>
       <div class="flex justify-center items-center mb-2">
         <label for="file-input" class="cursor-pointer">
@@ -31,7 +31,7 @@
         <textarea rows="5" cols="30" pInputTextarea formControlName="DescriptionAr" placeholder="Arabic Description"></textarea>
       </div>
     <div class="flex justify-center items-center">
-      <app-button text="Add Category" (clickButton)="onSubmit()"></app-button>
+      <app-button [text]="isUpdate ? 'Update' : 'Add' " (clickButton)="onSubmit()"></app-button>
     </div>
     </form>
 

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonService } from '../../shared/services/common.service';
 import { PlantsDetails } from '../../plants/models/getPlant-response.model';
 import { LanguageService } from 'src/app/services/language.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-category-plants',
@@ -17,7 +18,7 @@ export class CategoryPlantsComponent implements OnInit{
   categories!: CategoryDetails[];
   category: CategoryDetails | undefined;
   lang: any;
-  constructor(private activateRoue:ActivatedRoute , private commonService: CommonService , private langService: LanguageService ){
+  constructor(private activateRoue:ActivatedRoute , private commonService: CommonService , private langService: LanguageService , public authService:AuthService){
     this.activateRoue.params.subscribe((params)=>{
       this.categoryId = params['id']
     

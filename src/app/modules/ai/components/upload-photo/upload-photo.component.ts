@@ -28,9 +28,15 @@ export class UploadPhotoComponent {
 
  public showPlantName(){
   this.isExist = !this.isExist;
-  console.log(this.imageFile)
-  this.aiService.showImageResult(this.imageFile).subscribe((result:any)=>{
+  const formData = new FormData();
+  formData.append('image' , this.imageFile)
+  this.aiService.showImageResult(formData).subscribe((result:any)=>{
     console.log(result)
+    this.imageFile = null;
   })
+ }
+
+ load(){
+  console.log('reach to it ')
  }
 }

@@ -15,7 +15,10 @@ this.params = params;
   refresh(params: ICellRendererParams<any, any, any>): boolean {
     return false;
   }
-removeUser(userId:any){
-this.params.context.componentParent.removeUser(userId)
+  lockedUser(userId:any){
+this.params.context.componentParent.lockedUser(userId)
+}
+unLockUser(userId:any){
+  this.params.context.componentParent.unLockUser(userId)
 }
 }

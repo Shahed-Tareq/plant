@@ -11,16 +11,17 @@ import { ChangeImageDirective } from './directives/change-image.directive';
 import { LoaderComponent } from './components/loader/loader.component';
 import { TextLengthPipe } from './pipes/text-length.pipe';
 import { AgGridModule } from 'ag-grid-angular';
+import { AddNewPlantComponent } from './components/add-new-plant/add-new-plant.component';
 
 
 
-const components = [CategoryComponent , PlantComponent , LoaderComponent]
+const components = [AddNewPlantComponent,CategoryComponent , PlantComponent , LoaderComponent]
 const modules = [FontAwesomeModule , PrimengModule , AgGridModule, FormsModule,TranslateModule ,ReactiveFormsModule]
 @NgModule({
   declarations: [
     ...components,
     ChangeImageDirective,
-    TextLengthPipe,
+    TextLengthPipe
     
     
   ],

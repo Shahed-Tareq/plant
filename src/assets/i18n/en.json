@@ -3,6 +3,7 @@
       "home": "Home",
       "about": "About",
       "categories":"Categories",
+      "category":"Category",
       "upload":"Upload",
       "community":"Community",
       "login": "Login",
@@ -28,7 +29,10 @@
   "start": "Start"
 } ,
 "categories":{
-  "search":"Search"
+  "search":"Search" ,
+  "noContent":"No Plants related to this Category",
+  "newPlant": "Add Plant Name",
+  "addNewPlantDescription": "Enter a plant name to uncover detailed information. Explore the botanical world at your fingertips with our search feature"
 },
 "upload":{
   "uploadPhoto": "Upload Photo",
