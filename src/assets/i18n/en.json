@@ -31,6 +31,7 @@
 "categories":{
   "search":"Search" ,
   "noContent":"No Plants related to this Category",
+  "noPlants":"No Plants are available",
   "newPlant": "Add Plant Name",
   "addNewPlantDescription": "Enter a plant name to uncover detailed information. Explore the botanical world at your fingertips with our search feature"
 },
@@ -99,5 +100,13 @@
   "codeVerification":"Please check your inbox for further instructions on resetting your password",
   "submitEmail":"To reset your password, please enter your registered email address.",
   "submitCode" :"Your code has been successfully submitted. Please enter your new password."
+},
+"plantDetails":{
+  "name":"Name",
+  "medicalBenefits":"Medical Benefits",
+  "shortDescription":"Short Description",
+  "season":"Season",
+   "care":"How can take care"
+
 }
 }

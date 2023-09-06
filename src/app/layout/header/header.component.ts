@@ -55,7 +55,8 @@ changeHeaderLang(){
   const plants = this.translationService.getTranslation('header.plants');
   const users = this.translationService.getTranslation('header.users');
   const favorite = this.translationService.getTranslation('header.favorite');
-  const items = [home , about , categories , upload ,community,favorite,adminCategory , plants, users]
+  const plant = this.translationService.getTranslation('header.plants');
+  const items = [home , about , categories , upload ,community,favorite,adminCategory , plants, users ,plant]
   this.initializationSteps(items);
 
 
@@ -66,12 +67,14 @@ private initializationSteps(items:any[]){
     {label: items[0] , url:'/' , userTyp: 4},
     {label: items[1] , url:'/about' , userTyp: 4},
     {label: items[2] , url:'/categories' , userTyp: 4},
+    {label: items[9] , url:'/plant/plants' , userTyp: 4},
     {label: items[3] , url:'/ai' , userTyp: 4},
     {label: items[4] , url:'community' , userTyp: 4},
     {label: items[5] , url:'saved' , userTyp: 4},
     {label: items[6] , url:'/admin/viewCategory' , userTyp: 3},
     {label: items[7] , url:'/admin/viewPlant' , userTyp: 3},
-    {label: items[8] , url:'/admin/viewUser' , userTyp: 3},
+    {label: items[8] , url:'/admin/viewUser' , userTyp: 3}
+   
   ]
 }
 

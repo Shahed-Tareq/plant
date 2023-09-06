@@ -1,4 +1,4 @@
-<div class="container mt-24 ">
+<div class="container mt-24 pb-4">
  <div class="flex justify-center items-center">
     <div>
         <h1 class="md:text-2xl xxs:text-base font-bold">{{"upload.uploadPhoto" | translate}}</h1>
@@ -11,7 +11,7 @@
    </div>
      <div class="mt-16">
       <p class="md:text-xl xxs:text-base font-semibold">{{"upload.note" | translate}} </p>
-      <p class="text-sm text-[#665f5f]">{{"upload.noteDesc" | translate}}</p>
+      <p class="text-sm text-[#665f5f] md:w-[70%] xxs:w-full break-words">{{"upload.noteDesc" | translate}}</p>
     </div>
      <div class="flex items-center justify-center flex-col mt-8">
       <div>
@@ -33,9 +33,20 @@
       </div>
       <div class="mt-4" appScroll (reachedTarget)="load()" id="div-scroll">
         <app-button text="{{'upload.view' | translate}}" (clickButton)="showPlantName()" *ngIf="!isExist"></app-button>
-        <p  class="w-full bg-[#6cd66c]  py-2 px-7 rounded-full" *ngIf="isExist"> {{"upload.title" | translate}} <span> Orange </span></p>
-      </div>
-     
+        <p *ngIf = "isExist && (AIResponse.solution1 || AIResponse.solution2 || AIResponse.solution3)" class="font-semibold text-left text-xl my-3">  We've identified through our system that your photo shows signs of disease </p>
+        <p  class="w-full bg-[#6cd66c]  py-2 px-2 rounded-full text-center" *ngIf="isExist">  <span> {{AIResponse?.disease | uppercase}} </span></p>
      </div>
+    <ng-container *ngIf = "isExist && (AIResponse.solution1 || AIResponse.solution2 || AIResponse.solution3)">
+      <div>
+        <h3 class="font-semibold text-left text-xl mt-3">We will provide you with some recommendations to help treat this disease</h3>
+ 
+    <ul class="text-left text-base my-4">
+      <li> <i class="fas fa-check-circle"></i> {{AIResponse?.solution1}} </li>
+      <li><i class="fas fa-check-circle"></i> {{AIResponse?.solution2}} </li>
+      <li> <i class="fas fa-check-circle"></i>{{AIResponse?.solution3}} </li>
+    </ul>
+ 
+      </div>
+    </ng-container>
  </div>
  

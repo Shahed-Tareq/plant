@@ -11,9 +11,6 @@ import { LanguageService } from 'src/app/services/language.service';
   <h4 class="title md:text-2xl xxs:text-xl font-bold text-[#070404ba] mt-6"> {{"community.plants" | translate}} </h4>
   <p class="mb-6 text-[#665f5f] font-regular"> Lorem ipsum dolor sit amet consectetur,  sit libero animi nobis, similique</p>
 
-<!-- <div class="border-1 surface-border border-round m-2  py-5 px-3">
-    <app-plant [plantObject]="plant"> </app-plant>
-</div> -->
 <div class="grid lg:grid-cols-4 gap-6  xs:grid-cols-1 sm:grid-cols-2">
     <div *ngFor="let plant of plants.slice(0, 4)">
     <app-plant [plantObject]="plant"> </app-plant>

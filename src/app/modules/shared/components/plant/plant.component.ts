@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/modules/auth/services/auth.service';
     <img [src]="'http://ayalilly-001-site1.atempurl.com/'+plantObject.plantImage" class="w-full h-60 object-cover"> 
     <div class="py-4 px-4">
       <h3>{{plantObject.plantName}}</h3>
-      <p class = "text-sm my-3 text-justify text-[#3a3232f2]">{{plantObject.plantDescription | textLength:20}}</p>
+      <p class = "text-sm my-3 text-justify text-[#3a3232f2]">{{plantObject.plantDescription | textLength:40}}</p>
       <div>
      
       <div class="w-full flex justify-between items-center">

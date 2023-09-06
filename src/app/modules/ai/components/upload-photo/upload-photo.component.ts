@@ -1,5 +1,7 @@
+import { AiModule } from './../../ai.module';
 import { Component } from '@angular/core';
 import { AiService } from '../../service/ai.service';
+import { AIResponse } from '../../models/ai-response';
 
 @Component({
   selector: 'app-upload-photo',
@@ -13,8 +15,10 @@ export class UploadPhotoComponent {
   public isExist:boolean = false;
   public plantImage:string = '';
   public imageFile:any;
-
+  public AIResponse:any ;
  public selectPhoto(event:any){
+  this.isExist = false;
+  this.AIResponse = null;
  this.hasImage = true;
  const file = <File>event.target.files[0];
  this.imageFile = file;
@@ -27,13 +31,17 @@ export class UploadPhotoComponent {
  }
 
  public showPlantName(){
-  this.isExist = !this.isExist;
-  const formData = new FormData();
-  formData.append('image' , this.imageFile)
-  this.aiService.showImageResult(formData).subscribe((result:any)=>{
-    console.log(result)
-    this.imageFile = null;
-  })
+  if(this.imageFile){
+    this.isExist = !this.isExist;
+    const formData = new FormData();
+    formData.append('image' , this.imageFile)
+    this.aiService.showImageResult(formData).subscribe((result:any)=>{
+      this.AIResponse = result;
+      this.imageFile = null;
+      
+    })
+  }
+  
  }
 
  load(){

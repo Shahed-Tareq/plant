@@ -67,7 +67,7 @@ return this.httpRequestService.deleteRequest('Plant/DeletePlant' , {
 }
 
 categorySearch(categoryName:string, langId:any){
-return this.httpRequestService.getRequest('Plant/SearchForCategory' , {
+return this.httpRequestService.getRequest('Category/SearchForCategory' , {
   params: {
     categoryName:categoryName,
     langId:langId

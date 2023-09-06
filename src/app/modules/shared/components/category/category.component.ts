@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Category } from '../../models/category.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CategoryDetails } from '../../models/category-response.mdoel';
 

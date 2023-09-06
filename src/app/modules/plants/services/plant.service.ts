@@ -29,4 +29,8 @@ export class PlantService {
       }
     })
   }
+
+  addNewPlant(plantName:any){
+    return this.httpRequestService.postRequest('Plant/OrderToAddNewPlant'  , plantName)
+  }
 }

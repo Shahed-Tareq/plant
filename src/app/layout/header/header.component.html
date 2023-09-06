@@ -7,7 +7,7 @@
  <div>
     <ul class="list-none flex justify-between items-center">
         <ng-container *ngFor="let item of items">
-            <li class="mr-6 text-sm"  *ngIf="userType == item.userTyp"> <a [routerLink]="item.url" class="hover:text-green"> {{item.label }}</a></li>
+            <li class="mr-6 text-sm"  *ngIf="userType == item.userTyp"> <a [routerLink]="item.url" class="hover:text-green" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> {{item.label }}</a> </li> 
         </ng-container>
         <li class="cursor-pointer mr-6" (click)="op.toggle($event)" *ngIf="userType != 3"> <i class="fa-solid fa-globe"></i> </li> 
         <p-overlayPanel #op>
