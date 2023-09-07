@@ -50,7 +50,7 @@ this.userService.removeUser(userId.toString()).subscribe((result:any)=>{
       {field:'fullName' , headerName:'Full Name' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
       {field:'email' , headerName:'Email' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
       {field:'userType' , headerName:'User Type' , sortable:true , filter:true ,headerClass:'header-class' , flex:1},
-      {field:'image' , headerName:'Plant Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
+      {field:'image' , headerName:'User Image'  ,headerClass:'header-class' , flex:1 , cellRenderer:function(params:any){
       return `<img src="http://ayalilly-001-site1.atempurl.com/${params.value}" width="50px" hight="50px">`
       }},
       {field:'action' , headerName:'Actions'  ,headerClass:'header-class' , flex:1 , cellRenderer: UserButtonsComponent},

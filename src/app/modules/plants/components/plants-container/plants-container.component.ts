@@ -16,25 +16,38 @@ export class PlantsContainerComponent implements OnInit  {
   public searchTerm:any;
   public loading:boolean = false;
 plants:PlantsDetails[]=[]
+public lang!:number;
+public plantsCopy:any;
   constructor(private messageService:MessageService,public authService: AuthService,private langService:LanguageService ,private plantService: PlantService , private commonService: CommonService){}
   ngOnInit(): void {
     this.langService.languageChange.subscribe(newLang=>{
-      const lang = newLang == 'en' ? 1 : 2;
-      this.getAllPlants(lang)
+      this.lang = newLang == 'en' ? 1 : 2;
+      this.getAllPlants(this.lang)
      })
      const result = localStorage.getItem('lang')
-     const lang = result == 'ar' ? 2 : 1;
-     this.getAllPlants(lang)
+     this.lang = result == 'ar' ? 2 : 1;
+     this.getAllPlants(  this.lang)
   }
 
-  public searchPlant(){
-
+searchPlant(){
+    if(this.searchTerm.trim()){
+      this.commonService.categorySearch(this.searchTerm , this.lang).subscribe((result:any)=>{
+    if(result.isSuccess){
+      this.plants = result.data;
+    } 
+      })
+    }
+    else{
+      this.plants = this.plantsCopy;
   }
+    
+   }
 
   getAllPlants(langId:any){
     this.commonService.getAllPlants(langId).subscribe((result:GetAllPlantsResponse)=>{
       if(result.isSuccess){
         this.plants = result.data;
+        this.plantsCopy = this.plants;
   }
     })
   }

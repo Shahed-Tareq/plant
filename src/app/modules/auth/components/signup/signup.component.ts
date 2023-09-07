@@ -57,7 +57,9 @@ if(result.isSuccess){
 }, (error) => {
   console.error('An error occurred:', error);
   this.loading = false;
-})}
+})} else{
+  this.loading = false;
+}
 }
 
 

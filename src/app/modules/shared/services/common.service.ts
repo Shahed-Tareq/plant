@@ -74,4 +74,12 @@ return this.httpRequestService.getRequest('Category/SearchForCategory' , {
   }
 })
 }
+plantSearch(PlantName:any , langId:any){
+  return this.httpRequestService.getRequest('Plant/SearchForPlants' , {
+    params: {
+      PlantName:PlantName,
+      langId:langId
+    }
+  })
+}
 }
